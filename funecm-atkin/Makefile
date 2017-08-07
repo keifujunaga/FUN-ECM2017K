@@ -1,8 +1,8 @@
 # Makefile
 
 PROGRAM = funecm
-OBJS = bsgs.o atkin.o point.o double_add.o normal_add.o ecm.o scalar.o main.o
-CC = icc 
+OBJS =  bsgs.o atkin.o point.o double_add.o normal_add.o ecm.o scalar.o main.o
+CC = gcc 
 LIBRARY = -lgmp -lrt
 
 ifeq ($(ARCHITECTURE),Xeonphi) # for Xeonphi
@@ -13,8 +13,8 @@ else # for Xeon
 	LIBDIR = -L/home/project8/gmp/lib
 endif
 
-#CFLAGS = -fopenmp -O2 -lm -O4 -Wall -Wunused-parameter
-#LIBDIR = -L/usr/local/lib
+CFLAGS = -fopenmp -O2 -lm -O4 -Wall -Wunused-parameter
+LIBDIR = -L/usr/local/lib
 
 
 $(PROGRAM): $(OBJS)
@@ -36,7 +36,6 @@ atkin.o: atkin.c
 	$(CC) $(CFLAGS) -c $<
 bsgs.o: bsgs.c
 	$(CC) $(CFLAGS) -c $<
-
 all: clean $(PROGRAM)
 
 clean:

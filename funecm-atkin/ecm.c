@@ -6,7 +6,7 @@
 #include "gmp.h"
 #include "point.h"
 //aaaaaaaaaaaaaaa
-void ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const unsigned long int B1, const unsigned long int B2, FILE *fp, const int window_size)
+void ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const mpz_t ma, const mpz_t mb, const unsigned long int B1, const unsigned long int B2, FILE *fp, const int window_size)
 {
   PROJECTIVE_POINT P;
   int e;
@@ -68,7 +68,7 @@ void ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const un
 	end = omp_get_wtime();
 	stage1_time = end - start;
 	//[WORNING]
-	//mpz_set_ui(f,1);
+	mpz_set_ui(f,1);
 	//[WORNING]
 	goto FACTOR_FOUND;
       }
@@ -82,7 +82,7 @@ void ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const un
 
   start = omp_get_wtime();
   /* stage2 */
-  bsgs(f,P,B1,B2,window_size,N,fp,d);
+  bsgs(f,P,B1,B2,window_size,N,fp,d,ma,mb);
   end = omp_get_wtime();
   stage2_time = end - start;
 
