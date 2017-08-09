@@ -81,21 +81,21 @@ void dedicated_doubling(EXTENDED_POINT R, const EXTENDED_POINT P, const mpz_t N)
 }
 
 void montgomery_double(MONTGOMERY_POINT R, MONTGOMERY_POINT P, const mpz_t a, const mpz_t N){
-  mpz_t A,B,C,D,E,F,G,four,inv;
-  mpz_inits(A,B,C,D,E,F,G,four,inv,NULL);
+  mpz_t A,AA,B,BB,C,D,E,F,G,four,inv;
+  mpz_inits(A,AA,B,BB,C,D,E,F,G,four,inv,NULL);
   mpz_set_ui(four,4);
   //A = P->X + P->Z = x1+z1
   mpz_add(A,P->X,P->Z);
-  //A = (A * A) mod N = (x1+z1)^2
-  mpz_mul_mod(A,A,A,N);
+  //AA = (A * A) mod N = (x1+z1)^2
+  mpz_mul_mod(AA,A,A,N);
   //B = P->X - P->Z = x1-z1
   mpz_sub(B,P->X,P->Z);
-  //B = (B * B) mod N = (x1-z1)^2
-  mpz_mul_mod(B,B,B,N);
-  //C = A - B = (x1+z1)^2-(x1-z1)^2
-  mpz_sub(C,A,B);
-  //R->X = (A * B) mod N = (x1+z1)^2*(x1-z1)^2
-  mpz_mul_mod(R->X,A,B,N);
+  //BB = (B * B) mod N = (x1-z1)^2
+  mpz_mul_mod(BB,B,B,N);
+  //C = AA - BB = (x1+z1)^2-(x1-z1)^2
+  mpz_sub(C,AA,BB);
+  //R->X = (AA * BB) mod N = (x1+z1)^2*(x1-z1)^2
+  mpz_mul_mod(R->X,AA,BB,N);
   //D = a + 2 
   mpz_add_ui(D,a,2);
   //E = D / 4 = (a+2)/4
@@ -103,9 +103,9 @@ void montgomery_double(MONTGOMERY_POINT R, MONTGOMERY_POINT P, const mpz_t a, co
   mpz_mul(E,D,inv);
   //F = E * C = {(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}
   mpz_mul_mod(F,E,C,N);
-  //G = F + B = {(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}+(x1-z1)^2
-  mpz_add(G,F,B);
+  //G = F + BB = {(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}+(x1-z1)^2
+  mpz_add(G,F,BB);
   //R->Z = C * G = {(x1+z1)^2-(x1-z1)^2}*[{(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}+(x1-z1)^2]
   mpz_mul_mod(R->Z,C,G,N);
-  mpz_clears(A,B,C,D,E,F,G,four,inv,NULL);
+  mpz_clears(A,AA,B,BB,C,D,E,F,G,four,inv,NULL);
 }
