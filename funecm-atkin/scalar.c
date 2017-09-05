@@ -202,35 +202,37 @@ void scalar2(EXTENDED_POINT R, EXTENDED_POINT P, const unsigned long int k, cons
   free(Parray);
 }
 
-void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k, const mpz_t ma, const mpz_t mb, mpz_t N)
+void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k, const mpz_t ma, const mpz_t mb, const mpz_t N)
 {
   long int i = 0, m;
-
+  
   //R0 <- P
   montgomery_point_set(R0,P);
-
+  
   //R1 <- 2 * P
   MONTGOMERY_POINT R1;
   montgomery_point_init(R1);
   montgomery_double(R1,P,ma,N);
-
+  
   //kを10進数から2進数にする作業。bit配列にkの2進数を格納。
   m = count_bit(k);
-  int *bit = (int *)malloc(m);
+  char *bit = (char *)malloc(m);
   while(k > 0){
     bit[i] = k % 2;
-    k = k / 2;
+    k = k >> 1;
     i++;
-  }
+    }
 
-  for (i = m - 2; i >= 0; i--){
-    if(bit[i]){
+    for (i = m - 2; i >= 0; i--){
+      if(bit[i]){
       montgomery_add(R0,R0,R1,N);       //R0 <- R0 + R1
       montgomery_double(R1,R1,ma,N);    //R1 <- 2 * R1
-    }else{
-      montgomery_double(R0,R0,ma,N);    //R0 <- 2 * R0
-      montgomery_add(R1,R0,R1,N);       //R1 <- R0 + R1
+      }else{
+	montgomery_double(R0,R0,ma,N);    //R0 <- 2 * R0
+	montgomery_add(R1,R0,R1,N);       //R1 <- R0 + R1
+      }
     }
-  }
+  
   montgomery_point_clear(R1);
+  free(bit);
 }

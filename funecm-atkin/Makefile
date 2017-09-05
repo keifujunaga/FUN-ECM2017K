@@ -13,7 +13,7 @@ else # for Xeon
 	LIBDIR = -L/home/project8/gmp/lib
 endif
 
-CFLAGS = -fopenmp -O2 -lm -O4 -Wall -Wunused-parameter
+CFLAGS = -fopenmp -O2 -lm -O4 -Wall -Wunused-parameter -g 
 LIBDIR = -L/usr/local/lib
 
 

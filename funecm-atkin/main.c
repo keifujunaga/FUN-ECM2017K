@@ -160,9 +160,8 @@ int main (int argc, char *argv[])
       double A_end;
       if (found == 0) {
 	A_start = omp_get_wtime();
-
+	montgomery_coefficient(ma,mb,d,N);
 	if (atkin_flag){
-	  montgomery_coefficient(ma,mb,d,N);
 	  ecm(factor, N, X, Y, d, ma, mb, B1, B2, fp, window_size);
 	}else{
 	  ecm(factor, N, NULL, Y, d, ma, mb, B1, B2, fp, window_size);

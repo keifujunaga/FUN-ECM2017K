@@ -54,10 +54,10 @@ void bsgs(mpz_t p,PROJECTIVE_POINT P,const unsigned long int B1,const unsigned l
   }
   fprintf(stdout,"4\n");
   v2=(s-f/2)/f;
-  /*動かない
-  mscalar(giant_step,mP,f,window_size,ma,mb,N);
-  mscalar(Giant,giant_step,v2,window_size,ma,mb,N);
-  */
+  
+  mscalar(giant_step,mP,f,ma,mb,N);
+  mscalar(Giant,giant_step,v2,ma,mb,N);
+  
   fprintf(stdout,"5\n");
   while(s<=B2){
     v=(s-f/2)/f;
