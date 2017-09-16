@@ -59,37 +59,51 @@ void montgomery_add (MONTGOMERY_POINT R, MONTGOMERY_POINT P, MONTGOMERY_POINT Q,
 {//montgomery曲線の加算関数
   mpz_t A,B,C,D,E,F,G,H,GG,HH,MX,MZ;
   mpz_inits(A,B,C,D,E,F,G,H,GG,HH,MX,MZ,NULL);
-  //A = P->X + P->Z = x2+z2
+  /* A = P->X + P->Z 
+       = x2+z2 */
   mpz_add(A,P->X,P->Z);
-  //B = P->X - P->Z = x2-z2
+  /* B = P->X - P->Z 
+       = x2-z2 */
   mpz_sub(B,P->X,P->Z);
-  //C = Q->X + Q->Z = x3+z3
+  /* C = Q->X + Q->Z 
+       = x3+z3 */
   mpz_add(C,Q->X,Q->Z);
-  //D = Q->X - Q->Z = x3-z3
+  /* D = Q->X - Q->Z 
+       = x3-z3 */
   mpz_sub(D,Q->X,Q->Z);
-  //E = D * A = (x3-z3)*(x2+z2)
+  /* E = D * A 
+       = (x3-z3)*(x2+z2) */
   mpz_mul_mod(E,D,A,N);
-  //F = C * B = (x3+z3)*(x2-z2)
+  /* F = C * B 
+       = (x3+z3)*(x2-z2) */
   mpz_mul_mod(F,C,B,N);
-  //G = E + F = (x3-z3)-(x2+z2)+(x3+z3)*(x2-z2)
+  /* G = E + F = DA + CB 
+               = (x3-z3)*(x2+z2)+(x3+z3)*(x2-z2) */
   mpz_add(G,E,F);
-  //H = E - F = (x3-z3)-(x2+z2)-(x3+z3)*(x2-z2)
+  /* H = E - F = DA - CB 
+               = (x3-z3)*(x2+z2)-(x3+z3)*(x2-z2) */
   mpz_sub(H,E,F);
-  //G = G ^ 2 = {(x3-z3)-(x2+z2)+(x3+z3)*(x2-z2)}^2
-  //mpz_mul_mod(G,G,G,N);
+  /* GG = G ^ 2 = (DA + CB) ^ 2 
+                = {(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2 */
   mpz_pow_ui(GG,G,2);
   mpz_mod(GG,GG,N);
-  //H = H ^ 2 = {(x3-z3)-(x2+z2)-(x3+z3)*(x2-z2)}^2
-  //mpz_mul_mod(H,H,H,N);
+  /* HH = H ^ 2 = (DA - CB) ^ 2 
+                = {(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2 */
   mpz_pow_ui(HH,H,2);
   mpz_mod(HH,HH,N);
-  //MX = P->X - Q->X = x2-x3
+  /* MX = P->X - Q->X = x2-x3 */
   mpz_sub(MX,P->X,Q->X);
-  //MZ = P->Z - Q->Z = z2-z3
+  /* MZ = P->Z - Q->Z = z2-z3 */
   mpz_sub(MZ,P->Z,Q->Z);
-  //R->X = MZ * G = (z2-z3)*{(x3-z3)-(x2+z2)-(x3+z3)*(x2-z2)}^2
+  /* 
+     R->X = MZ * GG = MZ * (DA + CB) ^ 2 
+                    = (z2-z3)*{(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2
+   */
   mpz_mul_mod(R->X,MZ,GG,N);
-  //R->Z = MX * H = (x2-x3)*{(x3-z3)-(x2+z2)-(x3+z3)*(x2-z2)}^2
+  /*　
+    R->Z = MX * HH = MX * (DA - CB) ^ 2
+                   =(x2-x3)*{(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2
+  */
   mpz_mul_mod(R->Z,MX,HH,N);
   mpz_clears(A,B,C,D,E,F,G,H,MX,MZ,GG,HH,NULL);
 } 
