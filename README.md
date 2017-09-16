@@ -9,5 +9,5 @@ scalar.cのコアダンプ（浮動小数点演算例外）の修正
 ●point.cの関数が正しくない  
 ・protomon  
 mongomery曲線のy座標を復元後、stage1のkPのy座標を復元  
-・他2つ
+・他2つ  
 1-Yや-d-1など
