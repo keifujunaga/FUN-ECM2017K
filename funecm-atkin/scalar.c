@@ -202,7 +202,7 @@ void scalar2(EXTENDED_POINT R, EXTENDED_POINT P, const unsigned long int k, cons
   free(Parray);
 }
 
-void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k, const mpz_t ma, const mpz_t mb, const mpz_t N)
+void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k, const mpz_t ma, const mpz_t N)
 {
   long int i = 0, m;
   
@@ -219,7 +219,7 @@ void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k,
   char *bit = (char *)malloc(m);
   while(k > 0){
     bit[i] = k % 2;
-    k = k >> 1;
+    k >>= 1;
     i++;
     }
 
