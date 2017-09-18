@@ -10,4 +10,8 @@ scalar.cのコアダンプ（浮動小数点演算例外）の修正
 ・protomon  
 mongomery曲線のy座標を復元後、stage1のkPのy座標を復元  
 ・他2つ  
-1-Yや-d-1など
+1-Yや-d-1など  
+
+9/18  
+●extend edwards曲線とmontgomery曲線の両方とも使えるようにしました  
+●point.cのprotomon以外の修正
