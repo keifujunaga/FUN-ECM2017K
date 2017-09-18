@@ -134,11 +134,13 @@ void mbsgs(mpz_t p,PROJECTIVE_POINT P,const unsigned long int B1,const unsigned 
   MONTGOMERY_POINT Giant;
   extended_point_init(eP);
   montgomery_point_init(mP);
-  fprintf(stdout,"X=%ld Y=%ld Z=%ld\n",mpz_get_ui(mP->X),mpz_get_ui(mP->Y),mpz_get_ui(mP->Z));
+  protoext(eP,P,N);
+  exttomon(mP,eP,N);
+  /* fprintf(stdout,"X=%ld Y=%ld Z=%ld\n",mpz_get_ui(mP->X),mpz_get_ui(mP->Y),mpz_get_ui(mP->Z));
   protoext(eP,P,N);
   fprintf(stdout,"X=%ld Y=%ld Z=%ld\n",mpz_get_ui(eP->X),mpz_get_ui(eP->Y),mpz_get_ui(eP->Z));
   exttomon(mP,eP,N);
-  fprintf(stdout,"X=%ld Y=%ld Z=%ld\n",mpz_get_ui(mP->X),mpz_get_ui(mP->Y),mpz_get_ui(mP->Z));
+  fprintf(stdout,"X=%ld Y=%ld Z=%ld\n",mpz_get_ui(mP->X),mpz_get_ui(mP->Y),mpz_get_ui(mP->Z));*/
   montgomery_point_init(giant_step);
   montgomery_point_init(Giant);
   fprintf(stdout,"1\n");
