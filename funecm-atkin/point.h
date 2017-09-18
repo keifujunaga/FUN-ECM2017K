@@ -38,7 +38,7 @@ void afftopro(PROJECTIVE_POINT R, const AFFINE_POINT P);
 void protoaff(AFFINE_POINT R, const PROJECTIVE_POINT P, const mpz_t N);
 void protoext(EXTENDED_POINT R, const PROJECTIVE_POINT P, const mpz_t N);
 void exttopro(PROJECTIVE_POINT R, const EXTENDED_POINT P);
-void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, const PROJECTIVE_POINT P1, const PROJECTIVE_POINT P2, const mpz_t a, const mpz_t b, const mpz_t N);
+//void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, const PROJECTIVE_POINT P1, const PROJECTIVE_POINT P2, const mpz_t a, const mpz_t b, const mpz_t N);
 void exttomon(MONTGOMERY_POINT R, const EXTENDED_POINT P,const mpz_t N);
 void montgomery_coefficient (mpz_t A, mpz_t B,const mpz_t d, const mpz_t N);
 

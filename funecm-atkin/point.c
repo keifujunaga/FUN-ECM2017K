@@ -50,7 +50,10 @@ void exttopro(PROJECTIVE_POINT R, const EXTENDED_POINT P)
 	mpz_set(R->Z, P->Z);
 }
 
-void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, const PROJECTIVE_POINT P1, const PROJECTIVE_POINT P2, const mpz_t a, const mpz_t b, const mpz_t N)
+/*多分違う。montgomeryのy座標の復元の仕方が不明
+void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, 
+	      const PROJECTIVE_POINT P1, const PROJECTIVE_POINT P2, 
+	      const mpz_t a, const mpz_t b, const mpz_t N)
 {//projective曲線のkPの座標yをmontgomery曲線のkpの座標yに変更
   mpz_t A,B,C,D,E,F,G,H,I,J,K,L,inv;
   mpz_inits(A,B,C,D,E,F,G,H,I,J,K,L,inv,NULL);
@@ -62,7 +65,7 @@ void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, const PROJECTIVE_POI
   mpz_add(C,P1->X,P->X);
   //D = a * 2 = 2a
   mpz_mul_ui(D,a,2);
-  //E = C + D = x1+x+2a
+  //E = C + D = x1+x + 2a
   mpz_add(E,C,D);
   //F = B * E = (x1*x+1)*(x1+x+2a)
   mpz_mul_mod(F,B,E,N);
@@ -85,42 +88,45 @@ void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, const PROJECTIVE_POI
   mpz_mul_mod(R->Y,J,inv,N);
   mpz_clears(A,B,C,D,E,F,G,H,I,J,K,L,inv,NULL);
 }
+*/
 
 void exttomon(MONTGOMERY_POINT R, const EXTENDED_POINT P,const mpz_t N)
 {//Edwards曲線でのX,Y座標をmontgomery曲線でのX,Z座標に変換
-  mpz_t add,sub;
-  mpz_inits(add,sub,NULL);
-  //add = P->Y + 1 = y+1
-  mpz_add_ui(add,P->Y,1);
-  //sub = P->Y - 1 = y-1
-  mpz_sub_ui(sub,P->Y,1);
-  //sub = 1 / sub = 1/(y-1)
-  mpz_invert(sub,sub,N);
-  //R->X = add * sub = (y+1)*{1/(y-1)} = (y+1)/(y-1)
-  mpz_mul_mod(R->X,add,sub,N);
+  mpz_t A,B,C,inv;
+  mpz_inits(A,B,C,inv,NULL);
+  //A = y + 1 
+  mpz_add_ui(A,P->Y,1);
+  //B = y * -1
+  mpz_mul_ui(B,P->Y,-1);
+  //C = - y + 1
+  mpz_add_ui(C,B,1);
+  //inv = 1 / C = 1 / (1-y)
+  mpz_invert(inv,C,N);
+  //R->X = A * inv = (y+1)*{1/(1-y)} = (y+1)/(1-y)
+  mpz_mul_mod(R->X,A,inv,N);
   //R->Z = 1
   mpz_set_ui(R->Z,1);
-  mpz_clears(add,sub,NULL);
+  mpz_clears(A,B,C,inv,NULL);
 }
 
 void montgomery_coefficient (mpz_t A, mpz_t B,const mpz_t d, const mpz_t N)
 {//montgomery曲線の係数A,Bをedward曲線のdから算出
-  mpz_t C,D;
-  mpz_inits(C,D,NULL);
+  mpz_t C,D,E,F,inv;
+  mpz_inits(C,D,E,F,inv,NULL);
   //C = d - 1
   mpz_sub_ui(C,d,1);
   //D = d + 1
   mpz_add_ui(D,d,1);
-  //D = D * -1 = -d-1
-  mpz_mul_ui(D,D,-1);
-  //D = 1 / D = 1/(-d-1)
-  mpz_invert(D,D,N);
-  //C = C * 2 = 2*(d-1)
-  mpz_mul_ui(C,C,2);
-  //A = C * D = 2*(d-1)/(-d-1)
-  mpz_mul_mod(A,C,D,N);
-  //B = D * 4 = 4*(-d-1)
-  mpz_mul_ui(B,D,4);
-  mpz_clears(C,D,NULL);
+  //E = D * -1 = -d-1
+  mpz_mul_si(E,D,-1);
+  //inv = 1 / E = 1/(-d-1)
+  mpz_invert(inv,E,N);
+  //F = C * 2 = 2*(d-1)
+  mpz_mul_ui(F,C,2);
+  //A = F * inv = 2*(d-1)/(-d-1)
+  mpz_mul_mod(A,F,inv,N);
+  //B = E * 4 = 4*(-d-1)
+  mpz_mul_ui(B,E,4);
+  mpz_clears(C,D,E,F,inv,NULL);
 }
  
