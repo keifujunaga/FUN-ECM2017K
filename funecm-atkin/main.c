@@ -162,11 +162,11 @@ int main (int argc, char *argv[])
 	A_start = omp_get_wtime();
 	montgomery_coefficient(ma,mb,d,N);
 	if (atkin_flag){
-	  ecm(factor, N, X, Y, d, B1, B2, fp, window_size);
-	//mecm(factor, N, X, Y, d, ma, mb, B1, B2, fp, window_size);
+	  //ecm(factor, N, X, Y, d, B1, B2, fp, window_size);
+	mecm(factor, N, X, Y, d, ma, mb, B1, B2, fp, window_size);
 	}else{
-	  ecm(factor, N, NULL, Y, d, B1, B2, fp, window_size);
-	  //mecm(factor, N, NULL, Y, d, ma, mb, B1, B2, fp, window_size);
+	  //ecm(factor, N, NULL, Y, d, B1, B2, fp, window_size);
+	  mecm(factor, N, NULL, Y, d, ma, mb, B1, B2, fp, window_size);
 	}
 	A_end = omp_get_wtime();
 
@@ -180,7 +180,7 @@ int main (int argc, char *argv[])
 	/* retry if factor is 1 or N */
 	if (mpz_cmp_ui(factor, 1) == 0 || mpz_cmp(factor, N) == 0) {
 	  fprintf(fp, "factor not found\n\n");
-	  mpz_clears(X, Y, d, NULL);
+	  mpz_clears(X, Y, d, ma, mb, NULL);
 	  mpz_clear(factor);
 	  mpz_clear(cofactor);
 	  continue;
