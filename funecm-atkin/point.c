@@ -92,27 +92,6 @@ void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P,
 }
 */
 
-void exttomon(MONTGOMERY_POINT R, const EXTENDED_POINT P,const mpz_t N)
-{//Edwards曲線でのX,Y座標をmontgomery曲線でのX,Z座標に変換
-  mpz_t A,B,C,inv;
-  mpz_inits(A,B,C,inv,NULL);
-  //A = y + 1 
-  mpz_add_si(A,P->Y,1);
-  
-  //B = y *(-1)
-  mpz_mul_si(B,P->Y,-1);
-  
-  //C = - y + 1
-  mpz_add_ui(C,B,1);
-  
-  //inv = 1 / C = 1 / (1-y)
-  mpz_invert(inv,C,N);
-  //R->X = A * inv = (y+1)*{1/(1-y)} = (y+1)/(1-y)
-  mpz_mul_mod(R->X,A,inv,N);
-  //R->Z = 1
-  mpz_set_ui(R->Z,1);
-  mpz_clears(A,B,C,inv,NULL);
-}
 
 void montgomery_coefficient (mpz_t A, mpz_t B,const mpz_t d, const mpz_t N)
 {//montgomery曲線の係数A,Bをedward曲線のdから算出
@@ -135,3 +114,29 @@ void montgomery_coefficient (mpz_t A, mpz_t B,const mpz_t d, const mpz_t N)
   mpz_clears(C,D,E,F,inv,NULL);
 }
  
+
+void exttomon(MONTGOMERY_POINT R, const EXTENDED_POINT P,const mpz_t N)
+{//Edwards曲線でのX,Y座標をmontgomery曲線でのX,Z座標に変換
+  mpz_t A,B,C,inv;
+  mpz_inits(A,B,C,inv,NULL);
+  
+  //A = y + 1 
+  mpz_add_si(A,P->Y,1);
+  
+  //B = y *(-1)
+  mpz_mul_si(B,P->Y,-1);
+  
+  //C = - y + 1
+  mpz_add_ui(C,B,1);
+  
+  //inv = 1 / C = 1 / (1-y)
+  mpz_invert(inv,C,N);
+  
+  //R->X = A * inv = (y+1)*{1/(1-y)} = (y+1)/(1-y)
+  mpz_mul_mod(R->X,A,inv,N);
+  
+  //R->Z = 1
+  mpz_set_ui(R->Z,1);
+  mpz_clears(A,B,C,inv,NULL);
+}
+
