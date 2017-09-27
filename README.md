@@ -14,4 +14,7 @@ mongomery曲線のy座標を復元後、stage1のkPのy座標を復元
 
 9/18  
 ●extend edwards曲線とmontgomery曲線の両方とも使えるようにしました  
-●point.cのprotomon以外の修正
+●point.cのprotomon以外の修正  
+
+9/27
+●point.cの修正
