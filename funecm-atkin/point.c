@@ -97,11 +97,14 @@ void exttomon(MONTGOMERY_POINT R, const EXTENDED_POINT P,const mpz_t N)
   mpz_t A,B,C,inv;
   mpz_inits(A,B,C,inv,NULL);
   //A = y + 1 
-  mpz_add_ui(A,P->Y,1);
-  //B = y * -1
-  mpz_mul_ui(B,P->Y,-1);
+  mpz_add_si(A,P->Y,1);
+  
+  //B = y *(-1)
+  mpz_mul_si(B,P->Y,-1);
+  
   //C = - y + 1
   mpz_add_ui(C,B,1);
+  
   //inv = 1 / C = 1 / (1-y)
   mpz_invert(inv,C,N);
   //R->X = A * inv = (y+1)*{1/(1-y)} = (y+1)/(1-y)
