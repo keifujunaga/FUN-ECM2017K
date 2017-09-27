@@ -50,6 +50,8 @@ void exttopro(PROJECTIVE_POINT R, const EXTENDED_POINT P)
 	mpz_set(R->Z, P->Z);
 }
 
+
+
 /*多分違う。montgomeryのy座標の復元の仕方が不明
 void protomon(MONTGOMERY_POINT R, const PROJECTIVE_POINT P, 
 	      const PROJECTIVE_POINT P1, const PROJECTIVE_POINT P2, 
@@ -126,7 +128,7 @@ void montgomery_coefficient (mpz_t A, mpz_t B,const mpz_t d, const mpz_t N)
   //A = F * inv = 2*(d-1)/(-d-1)
   mpz_mul_mod(A,F,inv,N);
   //B = E * 4 = 4*(-d-1)
-  mpz_mul_ui(B,E,4);
+  mpz_mul_ui(B,inv,4);
   mpz_clears(C,D,E,F,inv,NULL);
 }
  
