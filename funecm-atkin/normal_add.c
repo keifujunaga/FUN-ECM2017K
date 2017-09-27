@@ -55,10 +55,11 @@ void extended_dedicated_add(EXTENDED_POINT R, EXTENDED_POINT P, EXTENDED_POINT Q
 	mpz_clears(A,B,C,D,E,F,G,H,tmp,NULL);
 }
 
-void montgomery_add (MONTGOMERY_POINT R, MONTGOMERY_POINT P, MONTGOMERY_POINT Q,const mpz_t N)
+void montgomery_add (MONTGOMERY_POINT R, MONTGOMERY_POINT P, 
+		     MONTGOMERY_POINT Q, MONTGOMERY_POINT O, const mpz_t N)
 {//montgomery曲線の加算関数
-  mpz_t A,B,C,D,E,F,G,H,GG,HH,MX,MZ;
-  mpz_inits(A,B,C,D,E,F,G,H,GG,HH,MX,MZ,NULL);
+  mpz_t A,B,C,D,E,F,G,H,GG,HH;
+  mpz_inits(A,B,C,D,E,F,G,H,GG,HH,NULL);
   /* A = P->X + P->Z 
        = x2+z2 */
   mpz_add(A,P->X,P->Z);
@@ -91,20 +92,16 @@ void montgomery_add (MONTGOMERY_POINT R, MONTGOMERY_POINT P, MONTGOMERY_POINT Q,
                 = {(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2 */
   mpz_pow_ui(HH,H,2);
   mpz_mod(HH,HH,N);
-  /* MX = P->X - Q->X = x2-x3 */
-  mpz_sub(MX,P->X,Q->X);
-  /* MZ = P->Z - Q->Z = z2-z3 */
-  mpz_sub(MZ,P->Z,Q->Z);
   /* 
-     R->X = MZ * GG = MZ * (DA + CB) ^ 2 
-                    = (z2-z3)*{(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2
+     R->X = O->Z * GG = O->Z * (DA + CB) ^ 2 
+                    = z1*{(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2
    */
-  mpz_mul_mod(R->X,MZ,GG,N);
+  mpz_mul_mod(R->X,O->Z,GG,N);
   /*　
-    R->Z = MX * HH = MX * (DA - CB) ^ 2
-                   =(x2-x3)*{(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2
+    R->Z = O->X * HH = O->X * (DA - CB) ^ 2
+                   =x1*{(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2
   */
-  mpz_mul_mod(R->Z,MX,HH,N);
-  mpz_clears(A,B,C,D,E,F,G,H,MX,MZ,GG,HH,NULL);
+  mpz_mul_mod(R->Z,O->X,HH,N);
+  mpz_clears(A,B,C,D,E,F,G,H,GG,HH,NULL);
 } 
   
