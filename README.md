@@ -17,4 +17,12 @@ mongomery曲線のy座標を復元後、stage1のkPのy座標を復元
 ●point.cのprotomon以外の修正  
 
 9/27
-●point.cの修正
+●point.cの修正  
+●scalar.cのmscalar修正  
+●normal_add.cのmontgomery_add修正  
+
+（課題点）  
+・montgomery曲線の初期座標の取り方  
+・montgomery曲線のbsgsを作るか作らないか  
+・ρ法の実装  
+・コマンドライン引数でmontgomery曲線、edwards曲線、ρ法の計算の選択を行えるようにする  
