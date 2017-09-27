@@ -225,11 +225,11 @@ void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k,
 
     for (i = m - 2; i >= 0; i--){
       if(bit[i]){
-      montgomery_add(R0,R0,R1,N);       //R0 <- R0 + R1
-      montgomery_double(R1,R1,ma,N);    //R1 <- 2 * R1
+	montgomery_add(R0,R0,R1,P,N);       //R0 <- R0 + R1
+	montgomery_double(R1,R1,ma,N);    //R1 <- 2 * R1
       }else{
 	montgomery_double(R0,R0,ma,N);    //R0 <- 2 * R0
-	montgomery_add(R1,R0,R1,N);       //R1 <- R0 + R1
+	montgomery_add(R1,R0,R1,P,N);       //R1 <- R0 + R1
       }
     }
   
