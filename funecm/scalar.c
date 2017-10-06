@@ -202,16 +202,16 @@ void scalar2(EXTENDED_POINT R, EXTENDED_POINT P, const unsigned long int k, cons
 	free(Parray);
 }
 
-void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k, const mpz_t ma, const mpz_t N)
+void montgomery_scalar(PROJECTIVE_POINT R0, const PROJECTIVE_POINT P, unsigned long int k, const mpz_t ma, const mpz_t N)
 {
   long int i = 0, m;
   
   //R0 <- P
-  montgomery_point_set(R0,P);
+  projective_point_set(R0,P);
   
   //R1 <- 2 * P
-  MONTGOMERY_POINT R1;
-  montgomery_point_init(R1);
+  PROJECTIVE_POINT R1;
+  projective_point_init(R1);
   montgomery_double(R1,P,ma,N);
   
   //kを10進数から2進数にする作業。bit配列にkの2進数を格納。
@@ -233,6 +233,6 @@ void mscalar(MONTGOMERY_POINT R0, const MONTGOMERY_POINT P, unsigned long int k,
       }
     }
   
-  montgomery_point_clear(R1);
+  projective_point_clear(R1);
   free(bit);
 }

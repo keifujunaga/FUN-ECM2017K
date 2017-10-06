@@ -164,8 +164,8 @@ void mbsgs(mpz_t p,PROJECTIVE_POINT P,const unsigned long int B1,const unsigned 
   fprintf(stdout,"4\n");
   v2=(s-f/2)/f;
   
-  mscalar(giant_step, mP, f, ma, N);
-  mscalar(Giant, giant_step, v2, ma, N);
+  montgomery_scalar(giant_step, mP, f, ma, N);
+  montgomery_scalar(Giant, giant_step, v2, ma, N);
   
   fprintf(stdout,"5\n");
   while(s<=B2){

@@ -129,21 +129,26 @@ int main (int argc, char *argv[])
   {
     #pragma omp for
     for (i = 0; i < number_of_elliptic_curves; i++) {
-      mpz_t X, Y, d, ma, mb; //ma, mb montgomeryの係数を追加
-      mpz_inits(X, Y, d, ma, mb, NULL);
+      mpz_t X, Y, d, montgomery_a, montgomery_b; //montgmery_a, montgmery_b montgomeryの係数を追加
+      mpz_inits(X, Y, d, montgomery_a, montgomery_b, NULL);
 
       if (atkin_flag) {
 	/* set X, Y, d by atkin-moraine ECPP */
 	atkin_moraine(X, Y, d, s, t, N);
 	//	gmp_printf("X=%Zd, ",X);
       } else {
-	/* use random Y */
+	/* use random Y
+	   use random a*/
 	gmp_randstate_t state;
 	gmp_randinit_default(state);
 	gmp_randseed_ui(state, (unsigned long int)time(NULL)+i);
 	mpz_urandomm(Y, state, N);
+	gmp_randseed_ui(state, (unsigned long int)time(NULL)+i);
+	mpz_urandomm(a,state,);
 	while (mpz_cmp_ui(Y, 2) < 0)
 	  mpz_add_ui(Y, Y, 1);
+	while (mpz_cmp_ui(a,2)==0)
+	  mpz_add_ui(a,a,1);
 				
 	/* mpz_set_ui(X,i+1);
 	   mpz_set_ui(Y,i+2);*/
@@ -163,10 +168,10 @@ int main (int argc, char *argv[])
 	montgomery_coefficient(ma,mb,d,N);
 	if (atkin_flag){
 	  //ecm(factor, N, X, Y, d, B1, B2, fp, window_size);
-	mecm(factor, N, X, Y, d, ma, mb, B1, B2, fp, window_size);
+	ecm(factor, N, X, Y, d, ma, mb, B1, B2, fp, window_size);
 	}else{
 	  //ecm(factor, N, NULL, Y, d, B1, B2, fp, window_size);
-	  mecm(factor, N, NULL, Y, d, ma, mb, B1, B2, fp, window_size);
+	  ecm(factor, N, NULL, Y, d, ma, mb, B1, B2, fp, window_size);
 	}
 	A_end = omp_get_wtime();
 
