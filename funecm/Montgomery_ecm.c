@@ -10,7 +10,7 @@
 //モンゴメリー曲線の公式（射影座標）
 //b*y^2=x^3+ax^2+x
 
-void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const mpz_t montgomery_a, const mpz_t montgomery_b, const unsigned long int B1, const unsigned long int B2, FILE *fp, const int window_size)
+void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t d, const mpz_t montgomery_a , const unsigned long int B1, const unsigned long int B2, FILE *fp, const int window_size)
 {
   PROJECTIVE_POINT P;
   int e;
@@ -18,12 +18,12 @@ void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t 
   mpz_t tmp;
   mpz_t tmp2;
   mpz_t inv;
-  mpz_t a;//モンゴメリー曲線の座標 
-  mpz_t b;
+  mpz_t montgomery_b;
 	
   mpz_init(tmp);
   mpz_init(tmp2);
   mpz_init(inv);
+  mpz_init(montgomery_b);
 
   projective_point_init(P);
 		
@@ -69,15 +69,17 @@ void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t 
       montgomery_scalar(P, P, p, montgomery_a, N);
      
       mpz_gcd(f, P->X, N);
-     // fprintf(fp,"prime number = %d time= %d \n",p,i);
-     // gmp_fprintf(fp,"montgomery_scalar_X = %Zd\n",P->X); 
-     // gmp_fprintf(fp,"montgomery_scalar_Y = %Zd\n",P->Y); 
-     // gmp_fprintf(fp,"montgomery_scalar_Z = %Zd\n",P->Z); 
+     /*	
+      fprintf(fp,"prime number = %d time= %d \n",p,i);
+      gmp_fprintf(fp,"montgomery_scalar_X = %Zd\n",P->X); 
+      gmp_fprintf(fp,"montgomery_scalar_Y = %Zd\n",P->Y); 
+      gmp_fprintf(fp,"montgomery_scalar_Z = %Zd\n",P->Z); 
+      */
       if (mpz_cmp_ui(f,1) != 0) {
 	end = omp_get_wtime();
 	stage1_time = end - start;
 	//[WORNING]
-	//mpz_set_ui(f,1);
+	//mpz_set_ui(f,1); // 強制的にstage2へ
 	//[WORNING]
 	goto FACTOR_FOUND;
       }
@@ -89,18 +91,16 @@ void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t 
   end = omp_get_wtime();
   stage1_time = end - start;
 
-/*
+
   start = omp_get_wtime();
   // stage2 
-  mbsgs(f,P,B1,B2,window_size,N,fp,d,ma,mb);
+  printf("transition to the stage2");
+  montgomery_bsgs(f,P,B1,B2,window_size,N,fp,d,montgomery_a,montgomery_b);
   end = omp_get_wtime();
   stage2_time = end - start;
-*/ 
+ 
 
  FACTOR_FOUND:
-//gmp_fprintf(fp,"montgomery_scalar_X = %Zd\n",P->X); 
-//gmp_fprintf(fp,"montgomery_scalar_Z = %Zd\n",P->Z); 
- gmp_fprintf(fp,"Stage1: Montgomery_a = %Zd\n", montgomery_a);
   fprintf(fp, "Stage1 time: %f seconds\n", stage1_time);
   if (stage2_time != -1){
     fprintf(fp, "Stage2 time: %f seconds\n", stage2_time);

@@ -140,16 +140,16 @@ int main (int argc, char *argv[])
 	//	gmp_printf("X=%Zd, ",X);
       } else {
 	/* use random Y */
-	/*gmp_randstate_t state;
+	gmp_randstate_t state;
 	gmp_randinit_default(state);
 	gmp_randseed_ui(state, (unsigned long int)time(NULL)+i);
 	mpz_urandomm(Y, state, N);
 	gmp_randseed_ui(state, (unsigned long int)time(NULL)+i);
 	mpz_urandomm(montgomery_a,state,N);
-	*/
+	/* version.degug 
         mpz_set_ui(Y,2);
         mpz_set_ui(montgomery_a,11);
-        mpz_out_str(stdout,10,montgomery_a);
+        */
         while (mpz_cmp_ui(Y, 2) < 0)
 	  mpz_add_ui(Y, Y, 1);
 	if (mpz_cmp_ui(montgomery_a,2)==0)
@@ -173,10 +173,10 @@ int main (int argc, char *argv[])
       //montgomery_coefficient(a,mb,d,N);
 	if (atkin_flag){
 	  //ecm(factor, N, X, Y, d, B1, B2, fp, window_size);
-	Montgomery_ecm(factor, N, X, Y, d, montgomery_a, montgomery_b, B1, B2, fp, window_size);
+	Montgomery_ecm(factor, N, X, Y, d, montgomery_a,  B1, B2, fp, window_size);
 	}else{
 	  //ecm(factor, N, NULL, Y, d, B1, B2, fp, window_size);
-	Montgomery_ecm(factor, N, NULL, Y, d, montgomery_a, montgomery_b, B1, B2, fp, window_size);
+	Montgomery_ecm(factor, N, NULL, Y, d, montgomery_a,  B1, B2, fp, window_size);
 	}
 	A_end = omp_get_wtime();
 

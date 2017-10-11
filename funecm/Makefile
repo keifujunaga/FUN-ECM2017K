@@ -1,7 +1,7 @@
 # Makefile
 
 PROGRAM = funecm
-OBJS =  bsgs.o atkin.o point.o double_add.o normal_add.o Montgomery_ecm.o scalar.o Montgomery_main.o
+OBJS =  Montgomery_bsgs.o atkin.o point.o double_add.o normal_add.o Montgomery_ecm.o scalar.o Montgomery_main.o
 CC = gcc 
 LIBRARY = -lgmp -lrt
 
@@ -34,7 +34,7 @@ scalar.o: scalar.c
 	$(CC) $(CFLAGS) -c $<
 atkin.o: atkin.c
 	$(CC) $(CFLAGS) -c $<
-bsgs.o: bsgs.c
+Montgomery_bsgs.o: Montgomery_bsgs.c
 	$(CC) $(CFLAGS) -c $<
 all: clean $(PROGRAM)
 
