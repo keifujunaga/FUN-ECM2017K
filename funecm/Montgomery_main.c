@@ -151,7 +151,7 @@ int main (int argc, char *argv[])
         mpz_set_ui(montgomery_a,11);
         */
         while (mpz_cmp_ui(Y, 2) < 0)
-	  mpz_add_ui(Y, Y, 1);
+	  mpz_add_ui(Y, Y, 3);
 	if (mpz_cmp_ui(montgomery_a,2)==0)
 	  mpz_add_ui(montgomery_a,montgomery_a,1);
 				
@@ -173,7 +173,6 @@ int main (int argc, char *argv[])
       //montgomery_coefficient(a,mb,d,N);
 	if (atkin_flag){
 	  //ecm(factor, N, X, Y, d, B1, B2, fp, window_size);
-	Montgomery_ecm(factor, N, X, Y, d, montgomery_a,  B1, B2, fp, window_size);
 	}else{
 	  //ecm(factor, N, NULL, Y, d, B1, B2, fp, window_size);
 	Montgomery_ecm(factor, N, NULL, Y, d, montgomery_a,  B1, B2, fp, window_size);

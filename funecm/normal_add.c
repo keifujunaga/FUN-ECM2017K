@@ -56,52 +56,71 @@ void extended_dedicated_add(EXTENDED_POINT R, EXTENDED_POINT P, EXTENDED_POINT Q
 }
 
 void montgomery_add (PROJECTIVE_POINT R, PROJECTIVE_POINT P, 
-		     PROJECTIVE_POINT Q, PROJECTIVE_POINT O, const mpz_t N)
+		     PROJECTIVE_POINT Q, PROJECTIVE_POINT P0, const mpz_t N)
 {//montgomery曲線の加算関数
+ //P0は初期座標を表している
+ //Qは足す座標を示している
+ //Rは格納する座標
+  //printf("\nnormal\n"); 
   mpz_t A,B,C,D,E,F,G,H,GG,HH;
   mpz_inits(A,B,C,D,E,F,G,H,GG,HH,NULL);
   /* A = P->X + P->Z 
-       = x2+z2 */
+       = xp+zp */
   mpz_add(A,P->X,P->Z);
-  /* B = P->X - P->Z 
-       = x2-z2 */
+  //gmp_printf("Xp+Zp=%Zd\n",A);
+   /* B = P->X - P->Z 
+       = xp-zp */
   mpz_sub(B,P->X,P->Z);
+  //gmp_printf("Xp-Zp=%Zd\n",B);
   /* C = Q->X + Q->Z 
-       = x3+z3 */
+       = xQ+zQ */
   mpz_add(C,Q->X,Q->Z);
+  //gmp_printf("XQ+ZQ=%Zd\n",C);
   /* D = Q->X - Q->Z 
-       = x3-z3 */
+       = xQ-zQ */
   mpz_sub(D,Q->X,Q->Z);
+  //gmp_printf("XQ-ZQ=%Zd\n",D);
   /* E = D * A 
-       = (x3-z3)*(x2+z2) */
+       = (xQ-zQ)*(xP+zP) */
   mpz_mul_mod(E,D,A,N);
+  //gmp_printf("(XQ-ZQ)*(Xp+Zp)=%Zd\n",E);
   /* F = C * B 
-       = (x3+z3)*(x2-z2) */
+       = (xQ+zQ)*(xP-zP) */
   mpz_mul_mod(F,C,B,N);
+  //gmp_printf("(XQ+ZQ)*(Xp-Zp)=%Zd\n",F);
   /* G = E + F = DA + CB 
-               = (x3-z3)*(x2+z2)+(x3+z3)*(x2-z2) */
+               = (xQ-zQ)*(xP+zP)+(xQ+zQ)*(xP-zP) */
   mpz_add(G,E,F);
+  //gmp_printf("(XQ-ZQ)*(Xp+Zp)+(XQ+ZQ)*(Xp-Zp)=%Zd\n",G);
   /* H = E - F = DA - CB 
-               = (x3-z3)*(x2+z2)-(x3+z3)*(x2-z2) */
+               = (xQ-zQ)*(xP+zP)-(xQ+zQ)*(xP-zP) */
   mpz_sub(H,E,F);
+  //gmp_printf("(xQ-zQ)*(xP+zP)-(xQ+zQ)*(xP-zP)=%Zd\n",H);
   /* GG = G ^ 2 = (DA + CB) ^ 2 
-                = {(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2 */
+                = {(xQ-zQ)*(xP+zP)+(xQ+zQ)*(xP-zP)}^2 */
   mpz_pow_ui(GG,G,2);
+  //gmp_printf("{(xQ-zQ)*(xP+zP)+(xQ+zQ)*(xP-zP)}^2=%Zd\n",GG);
   mpz_mod(GG,GG,N);
   /* HH = H ^ 2 = (DA - CB) ^ 2 
-                = {(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2 */
+                = {(xQ-zQ)*(xP+zP)-(xQ+zQ)*(xP-zP)}^2 */
   mpz_pow_ui(HH,H,2);
+  //gmp_printf("{(xQ-zQ)*(xP+zP)-(xQ+zQ)*(xP-zP)}^2=%Zd\n",HH);
   mpz_mod(HH,HH,N);
   /* 
      R->X = O->Z * GG = O->Z * (DA + CB) ^ 2 
-                    = z1*{(x3-z3)*(x2+z2)+(x3+z3)*(x2-z2)}^2
+                    = z1*{(xQ-zQ)*(xP+zP)+(xQ+zQ)*(xP-zP)}^2
    */
-  mpz_mul_mod(R->X,O->Z,GG,N);
+  mpz_mul_mod(R->X,P0->Z,GG,N);
+  //gmp_printf("Xp-q=%Zd\n",P0->X);
+  //gmp_printf("X=%Zd\n",R->X);
   /*　
     R->Z = O->X * HH = O->X * (DA - CB) ^ 2
-                   =x1*{(x3-z3)*(x2+z2)-(x3+z3)*(x2-z2)}^2
+                   =x1*{(xQ-zQ)*(xP+zP)-(xQ+zQ)*(xP-zP)}^2
   */
-  mpz_mul_mod(R->Z,O->X,HH,N);
+  mpz_mul_mod(R->Z,P0->X,HH,N);
+  //gmp_printf("Zp-q=%Zd\n",P0->Z);
+  //gmp_printf("Z=%Zd\n",R->Z);
   mpz_clears(A,B,C,D,E,F,G,H,GG,HH,NULL);
+  printf("\n");
 } 
   

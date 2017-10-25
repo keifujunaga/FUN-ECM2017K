@@ -3,6 +3,7 @@
 #include "gmp.h"
 #include "point.h"
 
+void point_p();
 /* for debug */
 void print_bit(unsigned long int n)
 {
@@ -204,16 +205,22 @@ void scalar2(EXTENDED_POINT R, EXTENDED_POINT P, const unsigned long int k, cons
 
 void montgomery_scalar(PROJECTIVE_POINT R0, const PROJECTIVE_POINT P, unsigned long int k, const mpz_t ma, const mpz_t N)
 {
+  //P mean P0
   long int i = 0, m;
   
+  //R0 mean Q  
   //R0 <- P
   projective_point_set(R0,P);
-  
-  //R1 <- 2 * P
+  //R1 mean P
+  //R1 <- 2 * P0
   PROJECTIVE_POINT R1;
+  PROJECTIVE_POINT TP;
   projective_point_init(R1);
-  montgomery_double(R1,P,ma,N);
-  
+  projective_point_init(TP);
+  projective_point_set(R1,P);
+  montgomery_double(R1,R1,ma,N);
+  projective_point_set(TP,P); 
+
   //kを10進数から2進数にする作業。bit配列にkの2進数を格納。
   m = count_bit(k);
   char *bit = (char *)malloc(m);
@@ -222,17 +229,24 @@ void montgomery_scalar(PROJECTIVE_POINT R0, const PROJECTIVE_POINT P, unsigned l
     k >>= 1;
     i++;
     }
-
-    for (i = m - 2; i >= 0; i--){
-      if(bit[i]){
-	montgomery_add(R0,R0,R1,P,N);       //R0 <- R0 + R1
+    for (i=m-2;i>= 0;i--){
+      
+       if(bit[i]==1){
+	montgomery_add(R0,R1,R0,TP,N);       //R0 <- R0 + R1
 	montgomery_double(R1,R1,ma,N);    //R1 <- 2 * R1
       }else{
+        montgomery_add(R1,R0,R1,TP,N);
 	montgomery_double(R0,R0,ma,N);    //R0 <- 2 * R0
-	montgomery_add(R1,R0,R1,P,N);       //R1 <- R0 + R1
       }
     }
   
   projective_point_clear(R1);
+  projective_point_clear(TP);
   free(bit);
+}
+
+void print_p(PROJECTIVE_POINT A){
+  gmp_printf("point_X = %Zd\n",A->X);
+  gmp_printf("point_Y = %Zd\n",A->Y);
+  gmp_printf("point_Z = %Zd\n\n",A->Z);  
 }

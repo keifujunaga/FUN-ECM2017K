@@ -67,20 +67,20 @@ void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t 
     for (i = 1; i <= e; i++) {
       /* P_Z <- 1 */
       montgomery_scalar(P, P, p, montgomery_a, N);
-     
-      mpz_gcd(f, P->X, N);
+      mpz_gcd(f, P->Z, N);
      /*	
       fprintf(fp,"prime number = %d time= %d \n",p,i);
       gmp_fprintf(fp,"montgomery_scalar_X = %Zd\n",P->X); 
       gmp_fprintf(fp,"montgomery_scalar_Y = %Zd\n",P->Y); 
       gmp_fprintf(fp,"montgomery_scalar_Z = %Zd\n",P->Z); 
       */
-      if (mpz_cmp_ui(f,1) != 0) {
+      if(mpz_cmp_ui(f,1) != 0&&mpz_cmp(f,N)!=0 ){
+	gmp_printf("value of f = %Zd \n",f);        
 	end = omp_get_wtime();
 	stage1_time = end - start;
-	//[WORNING]
-	//mpz_set_ui(f,1); // 強制的にstage2へ
-	//[WORNING]
+        //[WORNING]
+        mpz_set_ui(f,1);
+        //[WORNIG]
 	goto FACTOR_FOUND;
       }
     }
@@ -90,8 +90,7 @@ void Montgomery_ecm(mpz_t f, const mpz_t N, const mpz_t X, const mpz_t Y, mpz_t 
   }
   end = omp_get_wtime();
   stage1_time = end - start;
-
-
+ 
   start = omp_get_wtime();
   // stage2 
   printf("transition to the stage2");

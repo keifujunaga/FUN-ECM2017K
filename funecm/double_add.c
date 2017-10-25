@@ -83,53 +83,54 @@ void dedicated_doubling(EXTENDED_POINT R, const EXTENDED_POINT P, const mpz_t N)
 //calc montgomery double （2倍算）
 void montgomery_double(PROJECTIVE_POINT R, PROJECTIVE_POINT P, const mpz_t montgomery_a, const mpz_t N){
   //PがX1とx2の座標を示す
-
+   
   mpz_t A,AA,B,BB,C,D,E,F,G,four,inv;
   mpz_inits(A,AA,B,BB,C,D,E,F,G,four,inv,NULL);
   mpz_set_ui(four,4);
-
-  // A = P->X + P->Z = x1+z1
+  //printf("\ndouble\n");
+  // A = P->X + P->Z = xp+zp
   mpz_add(A,P->X,P->Z);
-  
-  // AA = (A * A) mod N = (x1+z1)^2
+  //gmp_printf("Xp+Zp=%Zd\n",A); 
+  // AA = (A * A) mod N = (xp+zp)^2
   mpz_mul_mod(AA,A,A,N);
-  
+  //gmp_printf("(Xp+Zp)^2=%Zd\n",AA); 
   // B = P->X - P->Z = x1-z1
   mpz_sub(B,P->X,P->Z);
-  
-  // BB = (B * B) mod N = (x1-z1)^2
+  //gmp_printf("Xp-Zp=%Zd\n",B); 
+  // BB = (B * B) mod N = (xp-zp)^2
   mpz_mul_mod(BB,B,B,N);
-  
-  // C = AA - BB = (x1+z1)^2-(x1-z1)^2
+  //gmp_printf("(Xp-Zp)^2=%Zd\n",BB); 
+  // C = AA - BB = (Xp+Zp)^2-(Xp-Zp)^2
   //4xz
   mpz_sub(C,AA,BB);
-  
-  // R->X3 = (AA * BB) mod N = (x1+z1)^2*(x1-z1)^2
+  //gmp_printf("4XpZp=%Zd\n",C); 
+  // R->X3 = (AA * BB) mod N = (Xp+Zp)^2*(Xp-Zp)^2
   //calc X_point
   mpz_mul_mod(R->X,AA,BB,N);
-  
+  //gmp_printf("X=%Zd\n",R->X); 
   // D = a + 2 
   mpz_add_ui(D,montgomery_a,2);
-  
+  //gmp_printf("a+2=%F\n",D); 
   // E = D / 4 = (a+2)/4
   mpz_invert(inv,four,N);
   mpz_mul(E,D,inv);
-  
+  //gmp_printf("(a+2)/4=%.*Ff\n",E); 
   // F = E * C = E * (AA - BB)
   //           = {(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}
   // a24*4xz
   mpz_mul_mod(F,E,C,N);
-  
+  //gmp_printf("a24*4XpZp=%Ff\n",F); 
   // G = F + BB = E * C + BB
   //            = E * (AA - BB) + BB 
   //            = {(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}+(x1-z1)^2
   // (x-z)^2+a24*4xz
   mpz_add(G,F,BB);
-  
+  //gmp_printf("(Xp-Zp)^2+a24*4XpZp=%Zd\n",G); 
   // R->Z = C * G = C * (F + BB)
   //              = C * (E * C + BB)
   //              = {(x1+z1)^2-(x1-z1)^2} *
   //                        [{(a+2)/4}*{(x1+z1)^2-(x1-z1)^2}+(x1-z1)^2]
   mpz_mul_mod(R->Z,C,G,N);
+  //gmp_printf("Z=%Zd\n",R->Z); 
   mpz_clears(A,AA,B,BB,C,D,E,F,G,four,inv,NULL);
 }
