@@ -155,15 +155,15 @@ montgomery_bsgs (mpz_t p, PROJECTIVE_POINT P, const unsigned long int B1,
   projective_point_init (temp2);
   projective_point_init (temp3);
 
-  fprintf (stdout, "1\n");
+  // fprintf (stdout, "1\n");
   projective_point_init (double_mP);
-  fprintf (stdout, "2\n");
+  // fprintf (stdout, "2\n");
   montgomery_double (double_mP, P, ma, N);	///
   for (i = 0; i < f4; i++)
     {
       projective_point_init (baby_step[i]);
     }
-  fprintf (stdout, "3\n");
+  // fprintf (stdout, "3\n");
   projective_point_init (add_mP);
   projective_point_set (add_mP, P);
   projective_point_set (temp, P);
@@ -188,28 +188,28 @@ montgomery_bsgs (mpz_t p, PROJECTIVE_POINT P, const unsigned long int B1,
 	  montgomery_add (temp, temp3, P, temp2, N);
 	  montgomery_add (add_mP, temp, temp3, P, N);
 	  projective_point_set (temp2, temp3);
-	  projective_point_set (temp, temp3);
+	  projective_point_set (temp3, temp);
 	}
     }
-  fprintf (stdout, "4\n");
+  // fprintf (stdout, "4\n");
   v2 = (s - f / 2) / f;
 
   montgomery_scalar (giant_step, P, f, ma, N);
   montgomery_scalar (Giant, giant_step, v2, ma, N);
-  montgomery_scalar (temp,giant_step,(v2-1),ma,N);
-  projective_point_set(temp2,Giant);
- 
-  fprintf (stdout, "5\n");
+  montgomery_scalar (temp, giant_step, (v2 - 1), ma, N);
+  projective_point_set (temp2, Giant);
+
+  //fprintf (stdout, "5\n");
   while (s <= B2)
     {
       v = (s - f / 2) / f;
       while (v != v2)
 	{
 	  v2++;
-	  montgomery_add(Giant, Giant, giant_step,temp,N);
-          projective_point_set(temp3,Giant);
-          projective_point_set(temp,temp2);
-          projective_point_set(temp2,temp3);
+	  montgomery_add (Giant, Giant, giant_step, temp, N);
+	  projective_point_set (temp3, Giant);
+	  projective_point_set (temp, temp2);
+	  projective_point_set (temp2, temp3);
 	}
       //fprintf (stdout, "6\n");
       u = abs ((s - f / 2) % f - f / 2);
@@ -231,5 +231,8 @@ montgomery_bsgs (mpz_t p, PROJECTIVE_POINT P, const unsigned long int B1,
   projective_point_clear (Giant);
   projective_point_clear (double_mP);
   projective_point_clear (add_mP);
-  fprintf (stdout, "8\n");
+  projective_point_clear (temp);
+  projective_point_clear (temp2);
+  projective_point_clear (temp3);
+  // fprintf (stdout, "8\n");
 }

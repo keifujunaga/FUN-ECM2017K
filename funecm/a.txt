@@ -1,381 +1,109 @@
-Input number: 10403  digits: 5
+Input number: 43984869934885695681337430213807975087471  digits: 41
 B1=11000
-B2=200000
+B2=1100000
 elliptic curves: 4000
 window size: 4
 threads = 1
-Stage1 time: 0.000179 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5365
+Stage1: d = 29844882484709328604265337620263219047025
+Stage1 time: 0.127564 seconds
+Stage2 time: 0.916784 seconds
+Stage2 gcd: 1
+total time: 1.044 seconds
+X=18243079727320265939020294956509954466787
+Y=3013810333417969453367971655557478057374
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000105 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=7572
+Stage1: d = 22818906314035362944892949134043703082048
+Stage1 time: 0.101487 seconds
+Stage2 time: 0.770873 seconds
+Stage2 gcd: 1
+total time: 0.872 seconds
+X=32219000315778456224068119065262540416660
+Y=27450115035091953149025429769579945061194
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000115 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=7550
+Stage1: d = 31213932876305521986022855956251872516468
+Stage1 time: 0.089640 seconds
+Stage2 time: 0.907088 seconds
+Stage2 gcd: 1
+total time: 0.997 seconds
+X=14982530109737802531814881543529316889070
+Y=16970022786475809023203904155294805848203
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000063 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=4885
+Stage1: d = 5581356744060357722838335436891410577861
+Stage1 time: 0.079333 seconds
+Stage2 time: 0.802100 seconds
+Stage2 gcd: 1
+total time: 0.881 seconds
+X=4100228432596158027445904585107306438565
+Y=36257475521570936979212421882200392417990
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000061 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=239
+Stage1: d = 10557831950967334364266572730434178058008
+Stage1 time: 0.076285 seconds
+Stage2 time: 0.852000 seconds
+Stage2 gcd: 1
+total time: 0.928 seconds
+X=39408057814477126470694066205080428908333
+Y=10804125339308459875279643945176710495930
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000011 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=3146
+Stage1: d = 13440836178403001169922698403507916070988
+Stage1 time: 0.077031 seconds
+Stage2 time: 0.844854 seconds
+Stage2 gcd: 1
+total time: 0.922 seconds
+X=39908575791991992738015767250096443353316
+Y=33341140373171462951559647223194034190475
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000044 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5938
+Stage1: d = 13112590682485311035661583099738039963758
+Stage1 time: 0.077378 seconds
+Stage2 time: 0.893689 seconds
+Stage2 gcd: 1
+total time: 0.971 seconds
+X=23140611014226017095686597474891772341146
+Y=35366760077177202284342635344522538882967
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000085 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=230
+Stage1: d = 15445239158441742787295679772686612382294
+Stage1 time: 0.098824 seconds
+Stage2 time: 0.925815 seconds
+Stage2 gcd: 1
+total time: 1.025 seconds
+X=5824177714196237859706625126779473991707
+Y=4222758798475731006453129910733954550081
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.000046 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=6231
+Stage1: d = 39827454796581583477130415405477980297271
+Stage1 time: 0.094089 seconds
+Stage2 time: 1.019472 seconds
+Stage2 gcd: 1
+total time: 1.114 seconds
+X=16558521539480295828272433094738656865949
+Y=15295929859533174122964821830007481417425
 --------------------------------------------------
 factor not found
 
-Stage1 time: 0.046801 seconds
-Stage2 time: 0.165377 seconds
-Stage2 gcd: 10403
-total time: 0.212 seconds
-Y=8827
+Stage1: d = 28523065301685186011476444584866483039355
+Stage1 time: 0.138160 seconds
+Stage2 time: 0.805812 seconds
+Stage2 gcd: 400454031557238773
+total time: 0.944 seconds
+X=7833426891148188530143607305539843905799
+Y=3846973733406412132012741312881329916522
 --------------------------------------------------
-factor not found
+@ probable prime factor found: 400454031557238773  digits: 18 cofactor: 109837500608602892582227
 
-Stage1 time: 0.000016 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8076
---------------------------------------------------
-factor not found
+total time: 9.699 seconds
 
-Stage1 time: 0.000044 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=4332
---------------------------------------------------
-factor not found
 
-Stage1 time: 0.000055 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=7461
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000006 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=7320
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000067 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2454
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.047257 seconds
-Stage2 time: 0.168235 seconds
-Stage2 gcd: 10403
-total time: 0.216 seconds
-Y=5194
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000090 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2634
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000086 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=6862
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000042 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=6067
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000125 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=1457
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000063 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=6679
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000084 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8965
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8586
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000045 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=361
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.048110 seconds
-Stage2 time: 0.167308 seconds
-Stage2 gcd: 10403
-total time: 0.215 seconds
-Y=9638
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000089 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5010
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000017 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=342
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000043 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5940
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.049893 seconds
-Stage2 time: 0.166639 seconds
-Stage2 gcd: 10403
-total time: 0.217 seconds
-Y=4974
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000133 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2724
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000012 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=7289
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.052194 seconds
-Stage2 time: 0.164013 seconds
-Stage2 gcd: 10403
-total time: 0.216 seconds
-Y=3016
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000045 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5781
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2061
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.049092 seconds
-Stage2 time: 0.165605 seconds
-Stage2 gcd: 10403
-total time: 0.215 seconds
-Y=5478
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000160 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2590
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000041 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=11
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5076
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000041 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5884
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000102 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5072
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8241
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000046 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=4643
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000011 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=3816
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000045 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=4114
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000242 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=6009
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000084 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2393
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000012 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=969
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000127 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=2227
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000017 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=1583
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=4999
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000006 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8330
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000041 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=5520
---------------------------------------------------
-factor not found
-
-Stage1 time: 0.000040 seconds
-Stage2 time: ----
-total time: 0.000 seconds
-Y=8257
----------------------------------------

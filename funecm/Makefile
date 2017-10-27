@@ -1,7 +1,7 @@
 # Makefile
 
 PROGRAM = funecm
-OBJS =  Montgomery_bsgs.o atkin.o point.o double_add.o normal_add.o Montgomery_ecm.o scalar.o Montgomery_main.o
+OBJS =  bsgs.o atkin.o point.o double_add.o normal_add.o ecm.o scalar.o main.o
 CC = gcc 
 LIBRARY = -lgmp -lrt
 
@@ -20,7 +20,7 @@ LIBDIR = -L/usr/local/lib
 $(PROGRAM): $(OBJS)
 	$(CC) $(CFLAGS) -o $(PROGRAM) $^ $(LIBRARY) $(LIBDIR)
 
-Montgomery_main.o: Montgomery_main.c
+main.o: main.c
 	$(CC) $(CFLAGS) -c $<
 point.o: point.c
 	$(CC) $(CFLAGS) -c $<
@@ -28,13 +28,13 @@ double_add.o: double_add.c
 	$(CC) $(CFLAGS) -c $<
 normal_add.o: normal_add.c
 	$(CC) $(CFLAGS) -c $<
-Montgomery_ecm.o: Montgomery_ecm.c
+ecm.o: ecm.c
 	$(CC) $(CFLAGS) -c $<
 scalar.o: scalar.c
 	$(CC) $(CFLAGS) -c $<
 atkin.o: atkin.c
 	$(CC) $(CFLAGS) -c $<
-Montgomery_bsgs.o: Montgomery_bsgs.c
+bsgs.o: bsgs.c
 	$(CC) $(CFLAGS) -c $<
 all: clean $(PROGRAM)
 

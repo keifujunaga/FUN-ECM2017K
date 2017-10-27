@@ -1,0 +1,126 @@
+Input number: 437256732647720373392867051041  digits: 30
+B1=11000
+B2=110000
+elliptic curves: 4000
+window size: 4
+threads = 1
+Stage1: d = 264802547451827715403022706935
+Stage1 time: 0.076225 seconds
+Stage2 time: 0.075701 seconds
+Stage2 gcd: 1
+total time: 0.152 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 429850085239363097440623200878
+Stage1 time: 0.055975 seconds
+Stage2 time: 0.076117 seconds
+Stage2 gcd: 1
+total time: 0.132 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 388349682847304491340281295786
+Stage1 time: 0.064924 seconds
+Stage2 time: 0.082715 seconds
+Stage2 gcd: 1
+total time: 0.148 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 375478300440935571919253994099
+Stage1 time: 0.055718 seconds
+Stage2 time: 0.072654 seconds
+Stage2 gcd: 1
+total time: 0.128 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 313273686537841015551663224156
+Stage1 time: 0.056119 seconds
+Stage2 time: 0.086897 seconds
+Stage2 gcd: 1
+total time: 0.143 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 300965862978926519821720113448
+Stage1 time: 0.064987 seconds
+Stage2 time: 0.074871 seconds
+Stage2 gcd: 1
+total time: 0.140 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 187516657087434602911826690871
+Stage1 time: 0.056132 seconds
+Stage2 time: 0.073383 seconds
+Stage2 gcd: 1
+total time: 0.130 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 84188173685644682056520049920
+Stage1 time: 0.056905 seconds
+Stage2 time: 0.072557 seconds
+Stage2 gcd: 1
+total time: 0.129 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 379681803867259990770641316999
+Stage1 time: 0.055165 seconds
+Stage2 time: 0.074208 seconds
+Stage2 gcd: 1
+total time: 0.129 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 101902340439657309440530974311
+Stage1 time: 0.061001 seconds
+Stage2 time: 0.089189 seconds
+Stage2 gcd: 1
+total time: 0.150 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 60826697896564407869640407572
+Stage1 time: 0.056780 seconds
+Stage2 time: 0.074008 seconds
+Stage2 gcd: 1
+total time: 0.131 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 362352778402765064887744845268
+Stage1 time: 0.056267 seconds
+Stage2 time: 0.072804 seconds
+Stage2 gcd: 1
+total time: 0.129 seconds
+Y=0
+--------------------------------------------------
+factor not found
+
+Stage1: d = 325235221131461980952908355165
+Stage1 time: 0.055203 seconds
+Stage2 time: 0.073167 seconds
+Stage2 gcd: 751376156658013
+total time: 0.128 seconds
+Y=0
+--------------------------------------------------
+@ probable prime factor found: 751376156658013  digits: 15 cofactor: 581941187211157
+
+total time: 1.774 seconds
+
+

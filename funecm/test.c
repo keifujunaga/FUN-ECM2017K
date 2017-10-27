@@ -17,7 +17,7 @@ main ()
   PROJECTIVE_POINT T;
   PROJECTIVE_POINT I;
   AFFINE_POINT A;
- 
+
   mpz_t tmp;
   mpz_t tmp2;
   mpz_t inv;
@@ -38,7 +38,7 @@ main ()
   projective_point_init (R);
   projective_point_init (T);
   projective_point_init (I);
-  affine_point_init(A);  
+  affine_point_init (A);
 
   mpz_set_ui (N, 311119);
   mpz_set_ui (tmp, 13);
@@ -72,11 +72,11 @@ main ()
 */
   printf ("\n");
   printf ("after_scalar\n");
-  montgomery_scalar (P, P,5, a, N);
+  montgomery_scalar (P, P, 5, a, N);
   //printf ("after_scalar\n");
-  print_p(P);
-  protoaff(A,P,N);
-  gmp_printf("X=%Zd\n",A->x);   
+  print_p (P);
+  protoaff (A, P, N);
+  gmp_printf ("X=%Zd\n", A->x);
   return 0;
 
 
