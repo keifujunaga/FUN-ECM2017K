@@ -21,8 +21,11 @@ mongomery曲線のy座標を復元後、stage1のkPのy座標を復元
 ●scalar.cのmscalar修正  
 ●normal_add.cのmontgomery_add修正  
 
-（課題点）  
-・montgomery曲線の初期座標の取り方  
-・montgomery曲線のbsgsを作るか作らないか  
-・ρ法の実装  
-・コマンドライン引数でmontgomery曲線、edwards曲線、ρ法の計算の選択を行えるようにする  
+10月  
+●モントゴメリーのスカラー倍と座標同士の足し算のバグ修正
+
+11/1  
+●プログラムを用いて計算を開始  
+●プログラムはモントゴメリーを使用して素数テーブルを実装したものを使用  
+
+
